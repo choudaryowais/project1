@@ -34,7 +34,8 @@ $routes->get('/WeaponController/showweapon', 'WeaponController::show');
 $routes->get('/WeaponController/issueweapon', 'WeaponController::issueweapon');
 $routes->get('/WeaponController/weaponoptions','WeaponController::weaponoptions');
 $routes->get('wif',function(){
-    return view('WeaponIssueForm');
+    $title="Issue Weapon";
+    return view('WeaponIssueForm',['title'=>$title]);
 });
 
 //home page
@@ -52,7 +53,7 @@ $routes->get('iw', function() {
 //for bullets
 $routes->get('/bulletform', 'BulletsController::bulletForm');
 $routes->post('/BulletsController/insert', 'BulletsController::insert');
-$routes->get('/showBullets', 'BulletsController::viewBullets');
+$routes->get('BulletController/showBullets', 'BulletsController::viewBullets');
 
 
 
@@ -75,7 +76,7 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('/employeeform', 'EmployeeController::employeeform');
 $routes->post('/EmployeeController/SaveEmployeeForm', 'EmployeeController::SaveEmployeeForm');
 $routes->get('/showemployee', 'EmployeeController::show');
-
+$routes->post('/EmployeeController/simplesearch', 'EmployeeController::simplesearch');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

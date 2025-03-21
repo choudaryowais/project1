@@ -103,4 +103,6 @@ class WeaponController extends BaseController
         $title="Weapon Options";
         return view('weaponoptions', ['title'=>$title]);
     }
+
+    
 }

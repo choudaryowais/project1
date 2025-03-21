@@ -38,7 +38,7 @@ class EmployeeController extends BaseController
     }
 
     public function show(){
-        $EmployeeModel = new EmployeeModel();
+        $EmployeeModel = new EmployeesModel();
         $data['employees'] = $EmployeeModel->findAll();
         $data['title']="Employee List";
         return view('employeeDetail', $data);
@@ -49,7 +49,7 @@ class EmployeeController extends BaseController
         $request = service('request');
         $searchData = $request->getPost(); // Get DataTables request parameters
     
-        $EmployeeModel = new EmployeeModel();
+        $EmployeeModel = new EmployeesModel();
         $result = $EmployeeModel->searchEmployees($searchData);
     
         // Add the 'action' and 'insert_action' fields to each row
@@ -65,4 +65,19 @@ class EmployeeController extends BaseController
     
         return $this->response->setJSON($data);
     }
+
+
+    
+    public function simplesearch()
+{
+    $searchInput = $this->request->getPost('searchInput');
+    $employeesModel = new EmployeesModel(); // Variable name is $employeesModel
+        
+    $employees = $employeesModel->like('name', $searchInput)
+                               ->orLike('beltno', $searchInput)  // Ensure this matches the database field
+                               ->orLike('cnic', $searchInput)
+                               ->findAll();
+        
+    return $this->response->setJSON(['data' => $employees]);
+}
 }

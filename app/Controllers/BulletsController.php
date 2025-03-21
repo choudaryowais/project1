@@ -85,12 +85,15 @@ public function search()
     $BulletsModel = new BulletsModel();
     $result = $BulletsModel->searchBullets($searchData, $userRole, $policeStationId);
 
-    // Add the 'action' field to each row
+    // Add the 'action' and 'status' fields to each row
     $data = array_map(function($row) {
         // Generate buttons for actions (Edit, Delete)
         $row['action'] = '
             <a href="/BulletsController/delete/' . $row['id'] . '" class="btn btn-success">Edit</a>
         ';
+
+        // Ensure the status is fetched from the database
+        $row['status'] = $row['status']; // This should come from the database
 
         return $row;
     }, $result['data']);

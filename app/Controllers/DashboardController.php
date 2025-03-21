@@ -12,11 +12,14 @@ class DashboardController extends BaseController
         $userRole = session()->get('role');
         $policeStationId = session()->get('police_station_id');
 
+        //get total number of weapons for admin
         if ($userRole === 'admin') {
             $totalWeapons = $weaponModel->countAllResults();
             $issuedWeapons = $weaponModel->where('status', 'Issued')->countAllResults();
             $availableWeapons = $weaponModel->where('status', 'Available')->countAllResults();
         } else {
+
+            //get total number of weapons for admin based on respective PS
             $totalWeapons = $weaponModel->where('police_station_id', $policeStationId)->countAllResults();
             $issuedWeapons = $weaponModel->where(['police_station_id' => $policeStationId, 'status' => 'Issued'])->countAllResults();
             $availableWeapons = $weaponModel->where(['police_station_id' => $policeStationId, 'status' => 'Available'])->countAllResults();

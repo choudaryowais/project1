@@ -22,6 +22,12 @@
         <h3 class="fw-bold fs-5 text-uppercase mt-2">VIEW WEAPON</h3>
       </a>
     </div>
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+      <a href="<?=base_url('BulletController/showBullets')?>" class="d-flex flex-column align-items-center justify-content-center p-4  text-white text-decoration-none rounded background-red">
+        <i class="fa-solid fa-person-rifle icon_style"></i>
+        <h3 class="fw-bold fs-5 text-uppercase mt-2">VIEW BULLETS</h3>
+      </a>
+    </div>
 
 
 
