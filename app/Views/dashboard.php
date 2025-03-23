@@ -11,7 +11,7 @@
 <div class="container my-3">
   <div class="row text-center">
     <div class="col-12 col-md-6 col-lg-3 mb-3 ">
-      <a href="/" class="d-flex flex-column align-items-center justify-content-center p-4  text-white text-decoration-none rounded background-red">
+      <a href="<?= base_url('weapon-controller/get-issued-weapons') ?>" class="d-flex flex-column align-items-center justify-content-center p-4  text-white text-decoration-none rounded background-red">
         <i class="fa-solid fa-chart-simple icon_style"></i>
         <h3 class="fw-bold fs-5 text-uppercase mt-2">Status</h3>
       </a>

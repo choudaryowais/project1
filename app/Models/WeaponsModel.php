@@ -58,4 +58,7 @@ class WeaponsModel extends Model
             'data' => $data
         ];
     }
+
+
+    
 }

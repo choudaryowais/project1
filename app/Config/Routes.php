@@ -33,9 +33,14 @@ $routes->post('/WeaponController/SaveWeaponForm', 'WeaponController::SaveWeaponF
 $routes->get('/WeaponController/showweapon', 'WeaponController::show');
 $routes->get('/WeaponController/issueweapon', 'WeaponController::issueweapon');
 $routes->get('/WeaponController/weaponoptions','WeaponController::weaponoptions');
+$routes->get('weapon-controller/get-emp-info/(:num)', 'WeaponController::GetEmpInfo/$1');
+
+$routes->get('weapon-controller/issue-weapon-form', 'WeaponController::IssueWeaponForm');
+$routes->post('weapon-controller/issuing-weapon', 'WeaponController::IssuingWeapon');
+$routes->post('weapon-controller/get-issued-weapons', 'WeaponController::getIssuedWeapons');
 $routes->get('wif',function(){
     $title="Issue Weapon";
-    return view('WeaponIssueForm',['title'=>$title]);
+    return view('WeaponIssueForm2',['title'=>$title]);
 });
 
 //home page

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 use App\Models\WeaponsModel;
+use App\Models\EmployeesModel;
+use App\Models\IssuedWeaponsModel;
 
 class WeaponController extends BaseController
 {
@@ -10,6 +12,27 @@ class WeaponController extends BaseController
         $title="Weapon Form";
         return view('weaponform', ['title'=>$title]);
     }
+
+    //display weapon form
+    public function GetEmpInfo($weapon_id = null)
+{
+    $title = "Issue Weapon";
+
+    // Fetch weapon details from the database using the weapon_id
+    $WeaponModel = new WeaponsModel();
+    $weaponDetails = $WeaponModel->find($weapon_id);
+
+    // Get user_id from the session
+    $user_id = session()->get('user_id');
+
+    // Pass data to the view
+    return view('WeaponIssueForm', [
+        'title' => $title,
+        'weapon_id' => $weapon_id,
+        'weaponDetails' => $weaponDetails,
+        'user_id' => $user_id
+    ]);
+}
 //insert weapon data from form
     public function SaveWeaponForm()
     {
@@ -80,10 +103,10 @@ class WeaponController extends BaseController
 
         // Add a new button for insert_action (e.g., "Insert")
         $row['insert_action'] = '
-            <a href="/weapon/delete/' . $row['id'] . '" class="btn btn-success">Issue</a>
-        ';
+        <a href="' . base_url('weapon-controller/get-emp-info/' . $row['id']) . '" class="btn btn-success">Issue</a>
+    ';
 
-        return $row;
+return $row;
     }, $result['data']);
 
     // Prepare the response for DataTables
@@ -104,5 +127,132 @@ class WeaponController extends BaseController
         return view('weaponoptions', ['title'=>$title]);
     }
 
-    
+    public function IssueWeaponForm()
+{
+    $title = "Issue Weapon";
+
+    // Get employee_id and weapon_id from the query parameters
+    $request = service('request');
+    $employee_id = $request->getGet('employee_id');
+    $weapon_id = $request->getGet('weapon_id');
+
+    // Fetch employee details
+    $EmployeeModel = new EmployeesModel();
+    $employeeDetails = $EmployeeModel->find($employee_id);
+
+    // Fetch weapon details
+    $WeaponModel = new WeaponsModel();
+    $weaponDetails = $WeaponModel->find($weapon_id);
+
+    // Get user_id from the session
+    $user_id = session()->get('user_id');
+
+    // Pass data to the view
+    return view('WeaponIssueForm2', [
+        'title' => $title,
+        'employeeDetails' => $employeeDetails,
+        'weaponDetails' => $weaponDetails,
+        'user_id' => $user_id
+    ]);
 }
+
+
+
+
+    // Handle the form submission for issuing a weapon
+  
+    public function IssuingWeapon()
+    {
+        if ($this->request->getMethod() == 'POST') {
+            // Get form data
+            $data = [
+                'weapon_id' => $this->request->getPost('weapon_id'),
+                'weapon_name'=>$this->request->getPost('weapon_name'),
+                'employee_id' => $this->request->getPost('employee_id'),
+                'user_id' => $this->request->getPost('user_id'),
+                'bullet_name' => $this->request->getPost('bullets_name'),
+                'bullet_quantity' => $this->request->getPost('no_of_bullets'),
+                'issue_date' => $this->request->getPost('issue_date'),
+                'status' => 'Issued' // Set status to 'Issued' in issued_weapons table
+            ];
+
+            // Load the models
+            $IssuedWeaponsModel = new IssuedWeaponsModel();
+            $WeaponsModel = new WeaponsModel();
+
+            // Start a database transaction (optional but recommended for data consistency)
+            $db = \Config\Database::connect();
+            $db->transStart();
+
+            try {
+                // Insert data into the issued_weapons table
+                $IssuedWeaponsModel->insert($data);
+
+                // Update the status of the weapon in the weapons table
+                $WeaponsModel->update($data['weapon_id'], ['status' => 'issued']);
+
+                // Commit the transaction
+                $db->transComplete();
+
+                // Redirect to a success page or display a success message
+                session()->setFlashdata('success', 'Weapon issued successfully!');
+                return redirect()->to(base_url('/WeaponController/issueweapon'));
+            } catch (\Exception $e) {
+                // Rollback the transaction in case of an error
+                $db->transRollback();
+
+                // Redirect to an error page or display an error message
+                session()->setFlashdata('error', 'Failed to issue weapon: ' . $e->getMessage());
+                return redirect()->to(base_url('weaponoptions'));
+            }
+        }
+    }
+
+
+
+
+    public function getIssuedWeapons()
+    {
+        $request = service('request');
+        $draw = $request->getPost('draw'); // Get the draw counter
+        $start = $request->getPost('start'); // Get the start offset
+        $length = $request->getPost('length'); // Get the number of records to fetch
+        $search = $request->getPost('search')['value']; // Get the search term
+    
+        // Load the model
+        $issuedWeaponsModel = new IssuedWeaponsModel();
+    
+        // Fetch total number of records (without filtering)
+        $totalRecords = $issuedWeaponsModel->countAll();
+    
+        // Apply search filter if a search term is provided
+        if (!empty($search)) {
+            $issuedWeaponsModel->groupStart()
+                               ->like('weapon_name', $search)
+                               ->orLike('bullet_name', $search)
+                               ->orLike('status', $search)
+                               ->groupEnd();
+        }
+    
+        // Fetch filtered records
+        $filteredRecords = $issuedWeaponsModel->countAllResults();
+    
+        // Fetch paginated records
+        $issuedWeapons = $issuedWeaponsModel->findAll($length, $start);
+    
+        // Prepare the response for DataTables
+        $response = [
+            'draw' => intval($draw), // Cast to integer for security
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $filteredRecords,
+            'data' => $issuedWeapons
+        ];
+    
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+
+    // Other methods...
+}
+
