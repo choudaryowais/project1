@@ -1,0 +1,319 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.background-image {
+    background-image: url('http://localhost:8080/assets/images/colt.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Weapon Form Styles */
+.weapon-form-container {
+    background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+    background-color: #030303;
+    border: 2px solid rgb(252, 248, 248);
+    background:transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid #f0f1f3; /* Border color */
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.weapon-form-container h2 {
+    margin-bottom: 20px;
+    color: #f3eded;
+}
+
+.weapon-form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.weapon-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f7f4f4;
+}
+
+.weapon-form-group input[type="text"],
+.weapon-form-group input[type="number"],
+.weapon-form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.weapon-form-group input[type="text"]:hover,
+.weapon-form-group input[type="number"]:hover,
+.weapon-form-group select:hover {
+    border-color: #007BFF; /* Change border color on hover */
+}
+
+.weapon-form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.weapon-form-container button:hover {
+    background-color: #1cac2f; /* Darker blue on hover */
+}
+
+/* Login Form Styles */
+.login-container {
+    background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+    background-color: #030303;
+    border: 2px solid rgb(252, 248, 248);
+    background:transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid #f0f1f3; /* Border color */
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #f3eded;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f7f4f4;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.input-group input[type="text"]:hover,
+.input-group input[type="password"]:hover {
+    border-color: #007BFF; /* Change border color on hover */
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #1cac2f; /* Darker blue on hover */
+}
+
+/* Bullet Form Styles */
+.bullet-form-container {
+    background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+    background-color: #030303;
+    border: 2px solid rgb(252, 248, 248);
+    background:transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid #f0f1f3; /* Border color */
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.bullet-form-container h2 {
+    margin-bottom: 20px;
+    color: #f3eded;
+    font-size: 24px;
+}
+
+.bullet-form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.bullet-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f7f4f4;
+    font-weight: bold;
+}
+
+.bullet-form-group select,
+.bullet-form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.bullet-form-group select:focus,
+.bullet-form-group input[type="number"]:focus {
+    border-color: #007BFF; /* Change border color on focus */
+    outline: none;
+}
+
+.bullet-form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.bullet-form-container button:hover {
+    background-color: #1cac2f; /* Darker blue on hover */
+}
+
+/* Additional Style for Better Accessibility */
+.bullet-form-group select option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* employee form */
+
+/* Employee Form Styles */
+.employee-form-container {
+    background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+    background-color: #030303;
+    border: 2px solid rgb(252, 248, 248);
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid #f0f1f3; /* Border color */
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.employee-form-container h2 {
+    margin-bottom: 20px;
+    color: #f3eded;
+}
+
+.employee-form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.employee-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f7f4f4;
+}
+
+.employee-form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.employee-form-group input[type="text"]:hover {
+    border-color: #007BFF; /* Change border color on hover */
+}
+.employee-form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+.employee-form-group select:hover {
+    border-color: #007BFF; /* Change border color on hover */
+}
+
+.employee-form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.employee-form-container button:hover {
+    background-color: #1cac2f; /* Darker blue on hover */
+}
+.icon_style{
+    font-size:40px;
+    color:#fff;
+    margin-bottom:10px;
+}
+
+.dashheading{
+    margin-top: 23px;
+    /* color: #007BFF !important; */
+    margin-bottom: 70px;
+}
+/* Base styling for the cards */
+.background-red {
+    background-color: #dc3545; /* Red background */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Hover effect applied only to icon and text */
+  .background-red:hover {
+    background-color: #c82333; /* Slightly darker red */
+  }
+  
+  /* Icon hover effect */
+  .background-red:hover i {
+    color: #007BFF !important; /* Change icon color */
+    transform: scale(1.2); /* Slightly increase size */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Text hover effect */
+  .background-red:hover h3 {
+    color: #f8f9fa !important; /* Lighten text color */
+    transition: color 0.3s ease-in-out;
+  }
+  
