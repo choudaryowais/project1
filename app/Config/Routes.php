@@ -37,7 +37,14 @@ $routes->get('weapon-controller/get-emp-info/(:num)', 'WeaponController::GetEmpI
 
 $routes->get('weapon-controller/issue-weapon-form', 'WeaponController::IssueWeaponForm');
 $routes->post('weapon-controller/issuing-weapon', 'WeaponController::IssuingWeapon');
-$routes->post('weapon-controller/get-issued-weapons', 'WeaponController::getIssuedWeapons');
+
+$routes->get('weapon-controller/get-issued-weapons', 'WeaponController::getissuedWeapons');
+$routes->get('stats',function(){
+
+    $title="issued Weapons";
+    return view('issuedWeapons',['title'=>$title]);
+});
+
 $routes->get('wif',function(){
     $title="Issue Weapon";
     return view('WeaponIssueForm2',['title'=>$title]);

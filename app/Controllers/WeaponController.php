@@ -208,51 +208,19 @@ return $row;
         }
     }
 
-
-
-
-    public function getIssuedWeapons()
+    public function getissuedWeapons()
     {
-        $request = service('request');
-        $draw = $request->getPost('draw'); // Get the draw counter
-        $start = $request->getPost('start'); // Get the start offset
-        $length = $request->getPost('length'); // Get the number of records to fetch
-        $search = $request->getPost('search')['value']; // Get the search term
-    
-        // Load the model
-        $issuedWeaponsModel = new IssuedWeaponsModel();
-    
-        // Fetch total number of records (without filtering)
-        $totalRecords = $issuedWeaponsModel->countAll();
-    
-        // Apply search filter if a search term is provided
-        if (!empty($search)) {
-            $issuedWeaponsModel->groupStart()
-                               ->like('weapon_name', $search)
-                               ->orLike('bullet_name', $search)
-                               ->orLike('status', $search)
-                               ->groupEnd();
-        }
-    
-        // Fetch filtered records
-        $filteredRecords = $issuedWeaponsModel->countAllResults();
-    
-        // Fetch paginated records
-        $issuedWeapons = $issuedWeaponsModel->findAll($length, $start);
-    
-        // Prepare the response for DataTables
-        $response = [
-            'draw' => intval($draw), // Cast to integer for security
-            'recordsTotal' => $totalRecords,
-            'recordsFiltered' => $filteredRecords,
-            'data' => $issuedWeapons
-        ];
-    
-        // Return the response as JSON
-        return $this->response->setJSON($response);
+        
+        $model = new IssuedWeaponsModel();
+        $data['issuedWeapons'] = $model->findAll();
+        $data['title']="Stats";
+
+        return view('issuedWeapons', $data);
     }
 
 
-    // Other methods...
+    
+
+  
 }
 
