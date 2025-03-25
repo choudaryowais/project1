@@ -89,6 +89,9 @@ $routes->get('/employeeform', 'EmployeeController::employeeform');
 $routes->post('/EmployeeController/SaveEmployeeForm', 'EmployeeController::SaveEmployeeForm');
 $routes->get('/showemployee', 'EmployeeController::show');
 $routes->post('/EmployeeController/simplesearch', 'EmployeeController::simplesearch');
+
+// In app/Config/Routes.php
+$routes->get('employees/getEmployeeDetails', 'EmployeeController::getEmployeeDetails');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

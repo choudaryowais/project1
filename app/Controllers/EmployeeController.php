@@ -80,4 +80,33 @@ class EmployeeController extends BaseController
         
     return $this->response->setJSON(['data' => $employees]);
 }
+
+
+// In your EmployeesController.php
+public function getEmployeeDetails()
+{
+    $employeeId = $this->request->getGet('employee_id');
+    
+    if (!$employeeId) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Employee ID is required'
+        ]);
+    }
+    
+    $model = new EmployeesModel();
+    $employee = $model->find($employeeId);
+    
+    if (!$employee) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Employee not found'
+        ]);
+    }
+    
+    return $this->response->setJSON([
+        'success' => true,
+        'data' => $employee
+    ]);
+}
 }

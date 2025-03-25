@@ -17,14 +17,19 @@ class IssuedWeaponsModel extends Model
     protected $allowedFields = [
         'weapon_id', 
         'weapon_name', 
+        'weapon_no', 
         'employee_id', 
+        'employee_name',
         'bullet_name', 
         'bullet_quantity', 
         'user_id', 
         'issue_date', 
         'return_date', 
-        'status'
+        'status',
+        'police_station_id'
     ]; // Fields that are allowed to be mass-assigned
 
     protected $useTimestamps = false; // Whether to use timestamps (created_at, updated_at)
+
+
 }

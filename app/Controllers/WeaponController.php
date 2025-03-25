@@ -127,6 +127,7 @@ return $row;
         return view('weaponoptions', ['title'=>$title]);
     }
 
+
     public function IssueWeaponForm()
 {
     $title = "Issue Weapon";
@@ -159,7 +160,7 @@ return $row;
 
 
 
-    // Handle the form submission for issuing a weapon
+    // Handle the form submission for issuing a weapon for issuing weapon form2
   
     public function IssuingWeapon()
     {
@@ -167,8 +168,10 @@ return $row;
             // Get form data
             $data = [
                 'weapon_id' => $this->request->getPost('weapon_id'),
+                'weapon_no' => $this->request->getPost('weapon_no'),
                 'weapon_name'=>$this->request->getPost('weapon_name'),
                 'employee_id' => $this->request->getPost('employee_id'),
+                'employee_name' => $this->request->getPost('name'),
                 'user_id' => $this->request->getPost('user_id'),
                 'bullet_name' => $this->request->getPost('bullets_name'),
                 'bullet_quantity' => $this->request->getPost('no_of_bullets'),
@@ -208,16 +211,21 @@ return $row;
         }
     }
 
-    public function getissuedWeapons()
-    {
-        
-        $model = new IssuedWeaponsModel();
-        $data['issuedWeapons'] = $model->findAll();
-        $data['title']="Stats";
+   // In your controller
+   public function getissuedWeapons()
+   {
+       $model = new IssuedWeaponsModel();
 
-        return view('issuedWeapons', $data);
-    }
-
+       
+       // Get the user_id from session
+       $userId = session()->get('user_id');
+       
+       // Only fetch weapons issued to this user
+       $data['issuedWeapons'] = $model->where('user_id', $userId)->findAll();
+       
+       $data['title'] = "Stats";
+       return view('issuedWeapons', $data);
+   }
 
     
 

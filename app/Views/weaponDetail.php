@@ -6,6 +6,7 @@
 
 <div class="container mt-5">
     <h1>Weapons Detail</h1>
+    
     <!-- Button to count weapons (floated to the right) -->
     <button id="countWeaponsBtn" class="btn btn-primary mb-3 float-end">Count Weapons by Name</button>
 
